@@ -14,6 +14,7 @@ all:
 	dd if=/dev/zero bs=512 count=8 >> ./bin/os.bin
 
 clean:
+	mkdir -p bin build
 	rm -f ./bin/boot.bin
 	rm -f ./bin/kernel.bin
 	rm -f ./bin/os.bin
