@@ -9,5 +9,5 @@
 		add-symbol-file ./build/completeKernel.o 0x100000
 		(hit y)
 		b kmain
-		target remote | qemu-system-x86_64 -hda ./bin/os.bin -gdb stdio -S
+		target remote | qemu-system-i386 -hda ./bin/os.bin -gdb stdio -S
 		(hit c to continue)
