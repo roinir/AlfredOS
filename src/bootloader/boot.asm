@@ -20,17 +20,17 @@ start:
     sti           ; Enable interrupts, allowing them to occur again
     
 
-;Load kernel
-mov bx, KERNEL_LOAD_SEG
-mov dh, 0x00
-mov dl, 0x80
-mov cl, 0x02
-mov ch, 0x00
-mov ah, 0x02
-mov al, 8
-int 0x13
+    ;Load kernel
+    mov bx, KERNEL_LOAD_SEG
+    mov dh, 0x00
+    mov dl, 0x80
+    mov cl, 0x02
+    mov ch, 0x00
+    mov ah, 0x02
+    mov al, 8
+    int 0x13
 
-jc disk_read_error
+    jc disk_read_error
 
 
 load_PM:

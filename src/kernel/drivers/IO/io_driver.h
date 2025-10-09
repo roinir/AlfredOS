@@ -1,3 +1,6 @@
+#ifndef IO_DRIVER
+#define IO_DRIVER
+
 /**
  * @brief Reads a byte from the specified port.
  * @parm port The 16-bit I/O port address to read from.
@@ -13,3 +16,5 @@ unsigned char port_byte_in(unsigned short port);
  * @return no return val.
  */
 void port_byte_out(unsigned short port, unsigned char data);
+
+#endif

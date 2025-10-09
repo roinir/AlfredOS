@@ -1,10 +1,13 @@
-FILES = ./build/kernel.asm.o ./build/kernel.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/vga_driver.o ./build/io_driver.o ./build/string.o
 FLAGS = -g -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
 all:
 	nasm -f bin ./src/bootloader/boot.asm -o ./bin/boot.bin -O0
 	nasm -f elf -g ./src/kernel/kernel_entry/kernel.asm -o ./build/kernel.asm.o
-	i686-linux-gnu-gcc -I./src $(FLAGS) -std=gnu99 -c ./src/kernel/kernel_entry/kernel.c -o ./build/kernel.o
+	i686-linux-gnu-gcc -I./src $(FLAGS) -std=gnu99 -c ./src/kernel/kernel_entry/kernel.c -o ./build/kernel.o	
+	i686-linux-gnu-gcc -I./src $(FLAGS) -std=gnu99 -c ./src/kernel/drivers/display/vga_driver.c -o ./build/vga_driver.o
+	i686-linux-gnu-gcc -I./src $(FLAGS) -std=gnu99 -c ./src/kernel/drivers/IO/io_driver.c -o ./build/io_driver.o	
+	i686-linux-gnu-gcc -I./src $(FLAGS) -std=gnu99 -c ./src/utils/string.c -o ./build/string.o
 	i686-linux-gnu-gcc -g -r $(FILES) -o ./build/completeKernel.o
 	i686-linux-gnu-gcc -ffreestanding -O0 -nostdlib -T ./src/bootloader/linkerScript.ld ./build/completeKernel.o -o ./bin/kernel.elf
 	i686-linux-gnu-objcopy -O binary ./bin/kernel.elf ./bin/kernel.bin	
@@ -21,4 +24,7 @@ clean:
 	rm -f ./bin/kernel.elf
 	rm -f ./build/kernel.asm.o
 	rm -f ./build/kernel.o
+	rm -f ./build/vga_driver.o
+	rm -f ./build/io_driver.o
+	rm -f ./build/string.h
 	rm -f ./build/completeKernel.o
